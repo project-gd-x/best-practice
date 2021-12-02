@@ -57,7 +57,7 @@ btnRandomAnimation.addEventListener('click', function () {
         colorPreview.style.backgroundColor = getRandomColor();
         inputColor.value = colorPreview.style.backgroundColor;
     }, 500);
-    
+
     function stopTimer() {
         clearInterval(timer);
     }
