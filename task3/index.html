@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #errorRows,
+        #errorCols {
+            color: indianred;
+            display: none;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-control label {
+            width: 50px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1>Create Table</h1>
+<div class="form-control">
+    <label for="rows">Rows</label>
+    <input type="number" value="" id="rows" />
+    <div id="errorRows"><strong>Error:</strong> input Rows is empty</div>
+</div>
+<div class="form-control">
+    <label for="cols">Cols</label>
+    <input type="number" value="" id="cols" />
+    <div id="errorCols"><strong>Error:</strong> input Cols is empty</div>
+</div>
+
+<button type="button" id="btnCreate">Create</button>
+<button type="button" id="btnRemove">Remove</button>
+
+<script src="main.js"></script>
+</body>
+</html>
