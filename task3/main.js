@@ -3,7 +3,6 @@ let cols = document.getElementById("cols");
 let errorRows = document.getElementById("errorRows");
 let errorCols = document.getElementById("errorCols");
 let btnCreate = document.getElementById("btnCreate");
-let btnRemove = document.getElementById("btnRemove");
 
 let body = document.body;
 
@@ -28,9 +27,16 @@ btnCreate.addEventListener('click', function () {
         errorCols.style.display = 'none';
 
         let table = document.createElement('table');
+        table.setAttribute('id', 'tableId');
 
         table.style.border = '1px solid #000';
         table.style.borderCollapse = 'collapse';
+
+        let oldTable = document.getElementById('tableId');
+
+        if (oldTable) {
+            oldTable.remove();
+        }
 
         for (let i = 0; i < rows.value; i++) {
             let tr = document.createElement('tr');
@@ -45,9 +51,5 @@ btnCreate.addEventListener('click', function () {
             }
         }
         body.appendChild(table);
-
-        btnRemove.addEventListener('click', function () {
-            table.remove();
-        })
     }
 });
