@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0 24px;
+            font-family: Arial, sans-serif;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        #errorRows,
+        #errorCols {
+            color: indianred;
+            display: none;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-control label {
+            width: 50px;
+            display: inline-block;
+        }
+
+        #colorPicker {
+            display: flex;
+            margin: 10px 0;
+        }
+
+        #colorPicker div {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        #colorPicker .active {
+            box-shadow: inset 0 0 0 2px darkgray;
+        }
+    </style>
+</head>
+<body>
+<h1>Create Table</h1>
+<div class="form-control">
+    <label for="rows">Rows</label>
+    <input type="number" value="" id="rows" />
+    <div id="errorRows"><strong>Error:</strong> input Rows is empty</div>
+</div>
+<div class="form-control">
+    <label for="cols">Cols</label>
+    <input type="number" value="" id="cols" />
+    <div id="errorCols"><strong>Error:</strong> input Cols is empty</div>
+</div>
+
+<button type="button" id="btnCreate">Create</button>
+
+<div class="d-flex">
+    <div id="colorPicker">
+        <div id="colorBlue"></div>
+        <div id="colorGreen"></div>
+        <div id="colorOrange"></div>
+        <div id="colorYellow"></div>
+    </div>
+</div>
+
+
+<script src="main.js"></script>
+</body>
+</html>
