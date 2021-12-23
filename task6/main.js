@@ -1,10 +1,12 @@
-const count = 20;
+const count = 5;
 let snowLetter = '*';
 
-let windowsWidth = window.screen.width;
-let windowsHeight = window.screen.height;
+// let windowsWidth = window.screen.width;
+let windowsWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+// let windowsHeight = window.screen.height;
+let windowsHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
 
-for (let i = 0; i <= count; i++) {
+for (let i = 0; i < count; i++) {
     let posX = Math.floor(windowsWidth * Math.random());
     let posY = Math.floor(windowsHeight * Math.random());
 
