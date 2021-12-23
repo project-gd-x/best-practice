@@ -66,6 +66,25 @@ btnCreate.addEventListener('click', function () {
         let table = document.createElement('table');
         table.setAttribute('id', 'tableId');
 
+        let isPressed = false;
+
+        table.addEventListener('mousedown', function () {
+            isPressed = true;
+            console.log('test')
+        })
+
+        table.addEventListener('mousemove', function (e) {
+            if (isPressed === true && e.target.nodeName === 'TD') {
+                let target = e.target;
+                target.style.backgroundColor = activeColor;
+                console.log('isPressed[true](mouseover): ' + isPressed)
+            }
+        })
+
+        window.addEventListener('mouseup', function () {
+            isPressed = false;
+        })
+
         table.style.border = '1px solid #000';
         table.style.borderCollapse = 'collapse';
 
@@ -75,26 +94,16 @@ btnCreate.addEventListener('click', function () {
             oldTable.remove();
         }
 
+
         for (let i = 0; i < rows.value; i++) {
             let tr = document.createElement('tr');
             table.appendChild(tr);
 
             for (let j = 0; j < cols.value; j++ ) {
                 let td = document.createElement('td');
-                let isPressed = false;
                 td.style.width = '5px';
                 td.style.height = '5px';
                 tr.appendChild(td);
-                table.addEventListener('mousedown', function (e) {
-                    let target = e.target;
-                    target.style.backgroundColor = activeColor;
-                    isPressed = true;
-                });
-                table.addEventListener('mouseup', function (e) {
-                    if (isPressed === true) {
-                        isPressed = false;
-                    }
-                })
             }
         }
         body.appendChild(table);
