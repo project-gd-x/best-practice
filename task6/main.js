@@ -1,7 +1,10 @@
 const count = 5;
 let snowLetter = '*';
 
-// let windowsWidth = window.screen.width;
+// let windowsWidth = window.screen.width - внутреняя ширина браузера;
+// window.innerWidth - ширина окна
+// document.documentElement.clientWidth - ширина html
+// document.body.clientWidth - ширина body
 let windowsWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // let windowsHeight = window.screen.height;
 let windowsHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
