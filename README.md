@@ -6,3 +6,4 @@
 - `task 4` - [link task 4](https://project-gd-x.github.io/best-practice/task4/)
 - `task 5` - [link task 5](https://project-gd-x.github.io/best-practice/task5/)
 - `task 6` - [link task 6](https://project-gd-x.github.io/best-practice/task6/)
+- `task 7` - [link task 7](https://project-gd-x.github.io/best-practice/task7/)
