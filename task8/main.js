@@ -1,7 +1,7 @@
 let snowLetter = '*';
 const snow = [];
 
-let windowsWidth = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) - 50;
+let windowsWidth = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
 let windowsHeight = (window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight) - 13;
 
 let sizeMax = 50;
@@ -40,11 +40,19 @@ function renderSnow() {
 function fallSnow() {
     snow.forEach((item) => {
         item.y += item.elt.offsetWidth / 5;
+        item.x += 3;
 
-        if (item.y >= windowsHeight) {
-            item.x = Math.floor(windowsWidth * Math.random());
-            item.y = 0;
+        if (item.y >= windowsHeight || item.x >= windowsWidth) {
+            if (Math.random() > 0.5) {
+                item.y = Math.floor(windowsHeight * Math.random());
+                item.x = -item.elt.offsetWidth;;
+            } else {
+                item.x = Math.floor(windowsWidth * Math.random());
+                item.y = -item.elt.offsetHeight;
+            }
+
         }
+
     });
 }
 
