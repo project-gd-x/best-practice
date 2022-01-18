@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+        }
+
+        .clock {
+            display: flex;
+            position: relative;
+            font-size: 80px;
+            font-weight: bold;
+            line-height: 87px;
+        }
+
+        .clock span {
+            background: #333;
+            color: #ccc;
+            border-radius: 6px;
+            padding: 0 10px;
+            position: relative;
+        }
+
+        .clock span::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -1px;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+    </style>
+</head>
+<body>
+
+<script src="main.js"></script>
+</body>
+</html>

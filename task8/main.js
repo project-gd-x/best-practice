@@ -45,7 +45,7 @@ function fallSnow() {
         if (item.y >= windowsHeight || item.x >= windowsWidth) {
             if (Math.random() > 0.5) {
                 item.y = Math.floor(windowsHeight * Math.random());
-                item.x = -item.elt.offsetWidth;;
+                item.x = -item.elt.offsetWidth;
             } else {
                 item.x = Math.floor(windowsWidth * Math.random());
                 item.y = -item.elt.offsetHeight;
