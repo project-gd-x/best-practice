@@ -1,5 +1,6 @@
 let myDiv = document.createElement('div');
 myDiv.classList.add('clock');
+document.body.appendChild(myDiv);
 
 function myClock() {
     let date = new Date();
@@ -24,7 +25,6 @@ function myClock() {
     time = '<span class="hour">' + h + '</span>' + ':' + '<span class="minute">' + m + '</span>' + ':' + '<span class="second">' + s + '</span>';
 
     myDiv.innerHTML = time;
-    document.body.appendChild(myDiv);
 
     setTimeout(myClock, 1000);
 }
