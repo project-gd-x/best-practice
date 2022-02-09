@@ -9,3 +9,4 @@
 - `task 7[animation snow]` - [link task 7](https://project-gd-x.github.io/best-practice/task7/)
 - `task 8[different snowflake, speed, drop at an angle]` - [link task 8](https://project-gd-x.github.io/best-practice/task8/)
 - `task 9[clock]` - [link task 9](https://project-gd-x.github.io/best-practice/task9/)
+- `task 10[clock and form]` - [link task 10](https://project-gd-x.github.io/best-practice/task10/)
