@@ -4,13 +4,10 @@ let formDiv = document.getElementById("form");
 let inputText = document.getElementById("inputText");
 let inputTime = document.getElementById("inputTime");
 let btnAdd = document.getElementById("btnAdd");
+let ol = document.getElementById("ol");
 let reminderDiv = document.createElement('div');
 
-myDiv.classList.add('clock');
-body.appendChild(myDiv);
-body.insertBefore(formDiv, myDiv.firstElementChild);
-
-formDiv.appendChild(reminderDiv);
+let idCount = 0;
 
 let img = {
     '0': 'img/0.svg',
@@ -24,6 +21,14 @@ let img = {
     '8': 'img/8.svg',
     '9': 'img/9.svg',
 }
+
+let reminders = [];
+
+myDiv.classList.add('clock');
+body.appendChild(myDiv);
+body.insertBefore(formDiv, myDiv.firstElementChild);
+
+formDiv.appendChild(reminderDiv);
 
 function myClock() {
     let date = new Date();
@@ -51,6 +56,21 @@ function myClock() {
 
     myDiv.innerHTML = numImg;
 
+    let trueTime = h + ':' + m;
+
+    for (let i = 0; i < reminders.length; i++) {
+        const r = reminders[i];
+        if (r.time === trueTime && !r.isExpired) {
+            r.isExpired = true;
+            console.log('isExpired: ', r.isExpired);
+            r.li.style.textDecoration = 'line-through';
+            r.li.style.color = '#ddd';
+            r.li.className = 'expired';
+
+            alert(inputText.value);
+        }
+    }
+
     setTimeout(myClock, 1000);
 }
 
@@ -71,17 +91,24 @@ window.onload = function () {
 
 btnAdd.addEventListener('click', function () {
     if (inputText.value !== '' && inputTime.value !== '') {
+        let li = document.createElement('li');
+        li.setAttribute('id', 'col-' + idCount++);
 
-        let reminders = [
-            {
-                text: inputText.value,
-                time: inputTime.value,
-                isExpired: false,
-            }
-        ]
+        reminders.push({
+            text: inputText.value,
+            time: inputTime.value,
+            isExpired: false,
+            li,
+        });
 
-        for (let i = 0; i < reminders.length; i++) {
-            reminderDiv.innerHTML = '<ol class="reminder-text"><li><div>Время события: ' + reminders[i].time + '</div>' + '<div>Текст события: ' + reminders[i].text + '</div>' + ' <button id="removeBtn" type="button">Delete</button></li></ol>' + reminders[i].isExpired;
-        }
+        li.innerHTML = '<div>Время события: ' + inputTime.value + '</div>' + '<div>Текст события: ' + inputText.value + ' <button type="button">Delete</button></div>';
+
+        const btnDelete = li.querySelector('button');
+
+        btnDelete.addEventListener('click', function () {
+            li.remove();
+        });
+
+        ol.appendChild(li);
     }
 });
