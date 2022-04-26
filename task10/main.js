@@ -36,7 +36,6 @@ function myClock() {
     let h = date.getHours();
     let m = date.getMinutes();
     let s = date.getSeconds();
-    // let time;
 
     if (h < 10) {
         h = '0' + h;
@@ -62,7 +61,7 @@ function myClock() {
         const r = reminders[i];
         if (r.time <= trueTime && !r.isExpired) {
             r.isExpired = true;
-            console.log('isExpired: ', r.isExpired);
+            // console.log('isExpired: ', r.isExpired);
             r.li.style.textDecoration = 'line-through';
             r.li.style.color = '#ddd';
             r.li.className = 'expired';
