@@ -60,14 +60,14 @@ function myClock() {
 
     for (let i = 0; i < reminders.length; i++) {
         const r = reminders[i];
-        if (r.time === trueTime && !r.isExpired) {
+        if (r.time <= trueTime && !r.isExpired) {
             r.isExpired = true;
             console.log('isExpired: ', r.isExpired);
             r.li.style.textDecoration = 'line-through';
             r.li.style.color = '#ddd';
             r.li.className = 'expired';
 
-            alert(inputText.value);
+            // alert(inputText.value);
         }
     }
 
@@ -93,6 +93,7 @@ btnAdd.addEventListener('click', function () {
     if (inputText.value !== '' && inputTime.value !== '') {
         let li = document.createElement('li');
         li.setAttribute('id', 'col-' + idCount++);
+        li.setAttribute('data-time', inputTime.value);
 
         reminders.push({
             text: inputText.value,
@@ -110,5 +111,9 @@ btnAdd.addEventListener('click', function () {
         });
 
         ol.appendChild(li);
+
+        Array.from(document.querySelectorAll("ol > li[data-time]"))
+            .sort(({dataset: {time: a}}, {dataset: {time: b}}) => a.localeCompare(b))
+            .forEach((item) => item.parentNode.appendChild(item));
     }
 });
