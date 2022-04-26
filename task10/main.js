@@ -67,7 +67,7 @@ function myClock() {
             r.li.style.color = '#ddd';
             r.li.className = 'expired';
 
-            // alert(inputText.value);
+            alert(inputText.value);
         }
     }
 
