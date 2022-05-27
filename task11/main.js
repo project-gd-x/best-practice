@@ -35,10 +35,6 @@ function addInput(item) {
         item.appendChild(createInput);
         createInput.focus();
     });
-
-    item.addEventListener('Escape', function () {
-        console.log('esc');
-    })
 }
 
 function addColDelete (item) {
