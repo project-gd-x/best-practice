@@ -7,7 +7,11 @@ function hasSelected(item) {
     item.addEventListener('click', function (e) {
         let elems = document.querySelector(".selected");
         let td = e.target.closest('td');
-        // let hasInput = document.querySelector('input');
+        let input = table.querySelector('input');
+
+        if (input !== null) {
+            input.remove();
+        }
 
         if ( elems !== null ) {
             elems.classList.remove("selected");
@@ -19,7 +23,6 @@ function hasSelected(item) {
 
 function addInput(item) {
     item.addEventListener('dblclick', function () {
-
         let input = table.querySelector('input');
 
         if (input !== null) {
@@ -32,6 +35,10 @@ function addInput(item) {
         item.appendChild(createInput);
         createInput.focus();
     });
+
+    item.addEventListener('Escape', function () {
+        console.log('esc');
+    })
 }
 
 function addColDelete (item) {
@@ -124,30 +131,22 @@ addCol.addEventListener('click', function () {
     }
 });
 
-
 document.addEventListener('keydown', (e) => {
     if ( e.code === 'Backspace' ) {
-        let selectedClass = document.querySelector('td.selected');
+        let selectedClass = table.querySelector('td.selected');
         if (selectedClass) {
             selectedClass.innerHTML = '&nbsp;';
             selectedClass.classList.remove('selected');
         }
     }
 
-    if (e.code === 'Enter') {
-        let currentInput = document.querySelector('input');
+    if (e.code === 'Enter' || e.code === 'Escape') {
+        let currentInput = table.querySelector('input');
         let td = e.target.closest('td');
         if (currentInput) {
             td.innerHTML = currentInput.value;
             currentInput.remove();
             td.classList.remove('selected');
-            // console.log('currentInput', currentInput.value);
-            // console.log('td', td);
         }
-
     }
 });
-
-// let trRows = table.querySelectorAll('tr');
-
-// console.log('trRows', table.querySelectorAll('tr'))
