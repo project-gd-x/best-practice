@@ -13,8 +13,12 @@ function hasSelected(item) {
             input.remove();
         }
 
-        if ( elems !== null ) {
+        if ( elems !== null && !e.shiftKey ) {
             elems.classList.remove("selected");
+        }
+
+        if ( e.shiftKey ) {
+            td.className = "selected";
         }
 
         td.className = "selected";
@@ -22,8 +26,11 @@ function hasSelected(item) {
 }
 
 function addInput(item) {
-    item.addEventListener('dblclick', function () {
+    item.addEventListener('dblclick', function (e) {
         let input = table.querySelector('input');
+        let td = e.target.closest('td');
+
+        // console.log('td', td.innerHTML);
 
         if (input !== null) {
             input.remove();
@@ -31,6 +38,11 @@ function addInput(item) {
 
         let createInput = document.createElement('input');
         createInput.setAttribute('type', 'text');
+
+        if (td.innerHTML !== '&nbsp;') {
+            createInput.value = td.innerHTML;
+            td.innerHTML = '&nbsp;';
+        }
 
         item.appendChild(createInput);
         createInput.focus();
@@ -130,6 +142,12 @@ addCol.addEventListener('click', function () {
 document.addEventListener('keydown', (e) => {
     if ( e.code === 'Backspace' ) {
         let selectedClass = table.querySelector('td.selected');
+        let selectedClassAll = table.querySelectorAll('td.selected');
+
+        for (let i = 0; i < selectedClassAll.length; i++){
+            selectedClassAll[i].classList.remove('selected');
+        }
+
         if (selectedClass) {
             selectedClass.innerHTML = '&nbsp;';
             selectedClass.classList.remove('selected');
@@ -146,3 +164,9 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// document.addEventListener('keydown', (e) => {
+//     if ( e.shiftKey ) {
+//         console.log('Shift', e.shiftKey)
+//     }
+// });
