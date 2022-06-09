@@ -5,7 +5,7 @@ let addCol = document.querySelector('#addCol');
 
 function hasSelected(item) {
     item.addEventListener('click', function (e) {
-        let elems = document.querySelector(".selected");
+        let elems = document.querySelectorAll(".selected");
         let td = e.target.closest('td');
         let input = table.querySelector('input');
 
@@ -13,8 +13,10 @@ function hasSelected(item) {
             input.remove();
         }
 
-        if ( elems !== null && !e.shiftKey ) {
-            elems.classList.remove("selected");
+        if ( elems.length > 0 && !e.shiftKey ) {
+            for (let i = 0 ; i < elems.length ; i++ ) {
+                elems[i].classList.remove("selected");
+            }
         }
 
         if ( e.shiftKey ) {
@@ -147,16 +149,11 @@ addCol.addEventListener('click', function () {
 
 document.addEventListener('keydown', (e) => {
     if ( e.code === 'Backspace' ) {
-        let selectedClass = table.querySelector('td.selected');
         let selectedClassAll = table.querySelectorAll('td.selected');
 
         for (let i = 0; i < selectedClassAll.length; i++){
+            selectedClassAll[i].innerHTML = '&nbsp;';
             selectedClassAll[i].classList.remove('selected');
-        }
-
-        if (selectedClass) {
-            selectedClass.innerHTML = '&nbsp;';
-            selectedClass.classList.remove('selected');
         }
     }
 
@@ -170,9 +167,3 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
-
-// document.addEventListener('keydown', (e) => {
-//     if ( e.shiftKey ) {
-//         console.log('Shift', e.shiftKey)
-//     }
-// });
