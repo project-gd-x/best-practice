@@ -42,6 +42,12 @@ function addInput(item) {
         if (td.innerHTML !== '&nbsp;') {
             createInput.value = td.innerHTML;
             td.innerHTML = '&nbsp;';
+
+            table.addEventListener('click', function(elem){
+                if (!td.contains(elem.target)){
+                    td.innerHTML = createInput.value;
+                }
+            });
         }
 
         item.appendChild(createInput);
