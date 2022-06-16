@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Documents manager</title>
+  <style>
+      .parent {
+          display: flex;
+          flex-direction: row;
+          width: 500px;
+          margin: 0 auto;
+          border: 2px solid #CCC;
+      }
+
+      .menu {
+          width: 30%;
+          height: 100vh;
+          background-color: #CCC;
+      }
+
+      .menu ul {
+          list-style-type: none;
+          padding: 5px 0 5px 5px;
+      }
+
+      .menu li {
+          cursor: pointer;
+          padding: 5px;
+      }
+
+      .menu li.active {
+          background-color: white;
+      }
+
+      .content {
+          width: 70%;
+          height: 100vh;
+          padding: 5px;
+      }
+
+      .content textarea {
+          width: 100%;
+          height: 500px;
+      }
+  </style>
+</head>
+<body>
+
+<div class="parent">
+  <div class="menu">
+    <ul>
+      <li class="active">Document 1</li>
+      <li>Document 2</li>
+      <li>Document 3</li>
+    </ul>
+    <button>NEW</button>
+  </div>
+  <div class="content">
+    <input type="text" value="Document 1"> - document title
+    <br>
+    <br>
+    <textarea>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </textarea>
+    <button>SAVE</button>
+    <button>DELETE</button>
+  </div>
+</div>
+
+<script>
+  const data = [
+    {
+      title: 'JavaScript is awesome',
+      text: 'This is your text for textarea',
+    },
+    {
+      title: 'Document 2',
+      text: 'Another text...',
+    },
+    {
+      title: 'Document 3',
+      text: 'One more text',
+    }
+  ]
+</script>
+
+</body>
+</html>
