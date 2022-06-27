@@ -48,41 +48,20 @@
 
 <div class="parent">
   <div class="menu">
-    <ul>
-      <li class="active">Document 1</li>
-      <li>Document 2</li>
-      <li>Document 3</li>
-    </ul>
-    <button>NEW</button>
+    <ul id="nav"></ul>
+    <button type="button" id="btnNew">NEW</button>
   </div>
   <div class="content">
-    <input type="text" value="Document 1"> - document title
+    <input id="title" type="text" value="" /> - document title
     <br>
     <br>
-    <textarea>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    </textarea>
-    <button>SAVE</button>
-    <button>DELETE</button>
+    <textarea id="textContent"></textarea>
+    <button type="button" id="btnSave">SAVE</button>
+    <button type="button" id="btnDelete">DELETE</button>
   </div>
 </div>
 
-<script>
-  const data = [
-    {
-      title: 'JavaScript is awesome',
-      text: 'This is your text for textarea',
-    },
-    {
-      title: 'Document 2',
-      text: 'Another text...',
-    },
-    {
-      title: 'Document 3',
-      text: 'One more text',
-    }
-  ]
-</script>
+<script src="main.js" ></script>
 
 </body>
 </html>
