@@ -16,51 +16,56 @@ const data = [
 let nav = document.getElementById('nav');
 let inputText = document.getElementById('title');
 let textContent = document.getElementById('textContent');
-let index;
+let index = 0;
 let btnNew = document.getElementById('btnNew');
 let btnSave = document.getElementById('btnSave');
 let btnDelete = document.getElementById('btnDelete');
 
-for (let i = 0; i < data.length; i++) {
-    let items = document.createElement('li');
-    items.innerHTML = data[i].title;
-    nav.appendChild(items);
-
-    inputText.value = data[0].title;
-    textContent.value = data[0].text;
-
-    nav.firstElementChild.classList.add('active');
-
-    items.addEventListener('click', function () {
-        inputText.value = data[i].title;
-        textContent.value = data[i].text;
-
-        let current = document.getElementsByClassName("active");
-
-        current[0].className = current[0].className.replace("active", "");
-        this.className += "active";
-    });
-
-    btnSave.addEventListener('click', function () {
-
-    });
-
-    btnDelete.addEventListener('click', function () {
-        inputText.value = '';
-        textContent.value = '';
-    });
-
-    btnNew.addEventListener('click', function () {
-        data.push(
-            { title: '', text: ''}
-        );
-
-        console.log(data);
-
-        let items = document.createElement('li');
-        items.innerHTML = data[data.length - 1].title;
-        nav.appendChild(items);
-    });
-
+function getElementIndex (element) {
+    return Array.from(element.parentNode.children).indexOf(element);
 }
+
+function render() {
+    nav.innerHTML = '';
+    for (let i = 0; i < data.length; i++) {
+        let items = document.createElement('li');
+        items.innerHTML = data[i].title;
+        nav.appendChild(items);
+
+        items.addEventListener('click', function () {
+            inputText.value = data[i].title;
+            textContent.value = data[i].text;
+
+            let current = document.getElementsByClassName("active");
+
+            current[0].className = current[0].className.replace("active", "");
+            this.className += "active";
+            index = getElementIndex(current[0]);
+        });
+    }
+
+    inputText.value = data[index].title;
+    textContent.value = data[index].text;
+
+    nav.querySelectorAll('li')[index].classList.add('active');
+}
+
+render();
+
+btnDelete.addEventListener('click', function () {
+    data.splice(index, 1);
+    render();
+});
+
+btnSave.addEventListener('click', function () {
+    data.splice(index, 1, {title: inputText.value, text: textContent.value});
+    render();
+});
+
+btnNew.addEventListener('click', function () {
+    data.push(
+        { title: 'New Document', text: ''}
+    );
+    render();
+});
 
