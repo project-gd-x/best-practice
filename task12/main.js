@@ -1,4 +1,4 @@
-const data = [
+let data = [
     {
         title: 'Document 1',
         text: 'This is your text for textarea',
@@ -16,10 +16,11 @@ const data = [
 let nav = document.getElementById('nav');
 let inputText = document.getElementById('title');
 let textContent = document.getElementById('textContent');
-let index = 0;
 let btnNew = document.getElementById('btnNew');
 let btnSave = document.getElementById('btnSave');
 let btnDelete = document.getElementById('btnDelete');
+let index = 0;
+let hasChanges = false;
 
 function getElementIndex (element) {
     return Array.from(element.parentNode.children).indexOf(element);
@@ -29,7 +30,11 @@ function render() {
     nav.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
         let items = document.createElement('li');
-        items.innerHTML = data[i].title;
+        if ( index === i && hasChanges ) {
+            items.innerHTML = '* ' + data[i].title;
+        } else {
+            items.innerHTML = data[i].title;
+        }
         nav.appendChild(items);
 
         items.addEventListener('click', function () {
@@ -41,6 +46,14 @@ function render() {
             current[0].className = current[0].className.replace("active", "");
             this.className += "active";
             index = getElementIndex(current[0]);
+
+            if (!data[index].isNew) {
+                data = data.filter((item) => {
+                    return !item.isNew
+                });
+
+                render();
+            }
         });
     }
 
@@ -53,19 +66,40 @@ function render() {
 render();
 
 btnDelete.addEventListener('click', function () {
-    data.splice(index, 1);
+
+        if (data.length > 1) {
+            if (confirm('Вы уверены что хотите удалить этот пункт?')) {
+                data.splice(index, 1);
+            }
+        } else {
+            alert('Последний пункт не удаляется!');
+        }
+
+        if (data[index] === undefined) {
+            index--
+        }
+
     render();
 });
 
-btnSave.addEventListener('click', function () {
-    data.splice(index, 1, {title: inputText.value, text: textContent.value});
+btnSave.addEventListener('click', function (event) {
+    // data.splice(index, 1, {title: inputText.value, text: textContent.value});
+    data[index] = {title: inputText.value, text: textContent.value, isNew: false};
+
+    console.log('data', data);
+
     render();
 });
 
 btnNew.addEventListener('click', function () {
-    data.push(
-        { title: 'New Document', text: ''}
-    );
+    if (!data[index].isNew) {
+        data.push(
+            { title: 'New Document', text: '', isNew: true }
+        );
+
+        index = data.length - 1;
+    }
+
     render();
 });
 
