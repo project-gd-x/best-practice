@@ -86,8 +86,6 @@ btnSave.addEventListener('click', function (event) {
     // data.splice(index, 1, {title: inputText.value, text: textContent.value});
     data[index] = {title: inputText.value, text: textContent.value, isNew: false};
 
-    console.log('data', data);
-
     render();
 });
 
