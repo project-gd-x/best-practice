@@ -17,9 +17,9 @@ function showToast(text) {
 
     toastWrap.append(toastItem);
 
-    // let items = document.querySelectorAll('.toast-item');
+    let items = document.querySelectorAll('.toast-item');
 
-    for (let i = 0; i < toastWrap.childNodes.length; ++i) {
+    for (let i = 0; i < items.length; ++i) {
         if (i >= 3) {
             toastItem.remove();
         }
