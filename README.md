@@ -12,3 +12,4 @@
 - `task 10[clock and form]` - [link task 10](https://project-gd-x.github.io/best-practice/task10/)
 - `task 11[table: add/delele row/col, add/delete text]` - [link task 11](https://project-gd-x.github.io/best-practice/task11/)
 - `task 12[documents manager]` - [link task 12](https://project-gd-x.github.io/best-practice/task12/)
+- `task 13[documents manager]` - [link task 13](https://project-gd-x.github.io/best-practice/task13/)

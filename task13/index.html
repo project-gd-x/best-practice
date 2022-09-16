@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Documents manager</title>
+  <style>
+    #toast_wrap {
+      position: fixed;
+      top: 5px;
+      right: 5px;
+    }
+
+    .toast-item {
+      padding: 8px;
+      border-radius: 8px;
+      background: #CCCCCC;
+      width: 300px;
+      margin-bottom: 5px;
+      transform: translateY(-200px);
+      transition: all 0.5s cubic-bezier(0, 0.54, 0.1, .98);
+    }
+
+    .toast-item.active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<button id="toastButton">Show toast</button>
+
+<div id="toast_wrap"></div>
+
+<script src="main.js" ></script>
+
+</body>
+</html>
