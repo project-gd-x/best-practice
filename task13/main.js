@@ -15,7 +15,7 @@ function showToast(text) {
         toastItem.classList.add('active');
     },100);
 
-    toastWrap.appendChild(toastItem);
+    toastWrap.append(toastItem);
 
     let items = document.querySelectorAll('.toast-item');
 
@@ -36,7 +36,7 @@ toastButton.addEventListener('click', ()=> {
 
 initToaster({
     count: 3,
-    duration: 10000
+    duration: 5000
 })
 
 showToast('Message Toast Click');
