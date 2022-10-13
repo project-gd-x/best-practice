@@ -28,12 +28,6 @@
       left: 5px;
     }
 
-    #toast_wrap.bottom_right,
-    #toast_wrap.bottom_left {
-      display: flex;
-      flex-direction: column-reverse;
-    }
-
     .toast-item {
       padding: 8px;
       border-radius: 8px;
@@ -42,6 +36,12 @@
       margin-bottom: 5px;
       position: absolute;
     }
+
+    .box_for_animation {
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
   </style>
 </head>
 <body>
@@ -49,6 +49,8 @@
 <button id="toastButton">Show toast</button>
 
 <div id="toast_wrap"></div>
+
+<div class="box_for_animation"></div>
 
 <script src="main.js" ></script>
 
