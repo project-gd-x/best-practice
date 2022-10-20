@@ -2,13 +2,13 @@ const toastButton = document.getElementById('toastButton');
 const toastWrap = document.getElementById('toast_wrap');
 let params;
 let counter = 1;
-let oldTimestamp = 0;
 
 function initToaster(_params) {
     params = _params;
 }
 
 function showToast(text) {
+    let oldTimestamp = 0;
     const toastItem = document.createElement('div');
     let items = document.querySelectorAll('.toast-item');
     toastItem.classList.add('toast-item');
@@ -54,47 +54,9 @@ function showToast(text) {
         toastWrap.prepend(toastItem);
     }
 
-    // if (items.length >= 3) {
-    //     items[0].remove();
-    // }
-
-    // let intervalId = setInterval(() => {
-    //     let posTop = toastItem.style.top;
-    //     const endPosTop = parseInt(toastItem.dataset.top);
-    //     let posBottom = toastItem.style.bottom;
-    //     const endPosBottom = parseInt(toastItem.dataset.bottom);
-    //
-    //     posTop = parseInt(posTop);
-    //     posBottom = parseInt(posBottom);
-    //
-    //     if (params.position === 'top-right' || params.position === 'top-left') {
-    //         if (posTop < endPosTop) {
-    //             posTop += 1;
-    //             toastItem.style.top = posTop + 'px';
-    //         } else {
-    //             toastItem.style.position = 'initial';
-    //             clearInterval(intervalId);
-    //
-    //             setTimeout(()=> {
-    //                 toastItem.remove();
-    //             }, params.duration);
-    //         }
-    //     }
-    //
-    //     if (params.position === 'bottom-right' || params.position === 'bottom-left') {
-    //         if (posBottom < endPosBottom) {
-    //             posBottom += 1;
-    //             toastItem.style.bottom = posBottom + 'px';
-    //         } else {
-    //             toastItem.style.position = 'initial';
-    //             clearInterval(intervalId);
-    //
-    //             setTimeout(()=> {
-    //                 toastItem.remove();
-    //             }, params.duration);
-    //         }
-    //     }
-    // }, 10);
+    if (items.length >= 3) {
+        items[0].remove();
+    }
 
     function step(timestamp) {
         let posTop = toastItem.style.top;
@@ -116,6 +78,8 @@ function showToast(text) {
 
             if (posTop <= endPosTop) {
                 window.requestAnimationFrame(step);
+            } else {
+                toastItem.style.position = 'initial';
             }
         }
 
@@ -129,32 +93,12 @@ function showToast(text) {
             }
         }
 
-        // setTimeout(()=> {
-        //     toastItem.remove();
-        // }, params.duration);
+        setTimeout(()=> {
+            toastItem.remove();
+        }, params.duration);
     }
 
     requestAnimationFrame(step);
-
-    // const animationBox = document.querySelector(".box_for_animation");
-    //
-    // function step(timestamp) {
-    //     if (!oldTimestamp) {
-    //         oldTimestamp = timestamp;
-    //     }
-    //
-    //     const progress = timestamp - oldTimestamp;
-    //
-    //     animationBox.style.transform = `translateY(${progress / 5}px)`;
-    //
-    //     const boxY = animationBox.getBoundingClientRect().bottom;
-    //
-    //     if (boxY <= window.innerHeight - 6) {
-    //         window.requestAnimationFrame(step);
-    //     }
-    // }
-    //
-    // requestAnimationFrame(step);
 }
 
 toastButton.addEventListener('click', ()=> {
@@ -167,28 +111,3 @@ initToaster({
     duration: 5000,
     position: 'top-right', // 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right'
 })
-
-// showToast('Message Toast Click');
-
-// function startAnimation() {
-//     requestId = window.requestAnimationFrame(step);
-// }
-// let oldTimestamp = 0;
-// function step(timestamp) {
-//     if (oldTimestamp === 0) {
-//         oldTimestamp = timestamp;
-//     }
-//
-//     console.log('Timestamp', timestamp - oldTimestamp ); // 16 , 1000
-//
-//     boxY += (timestamp - oldTimestamp) / 16;
-//     animationBox.style.top = boxY + 'px';
-//
-//     oldTimestamp = timestamp;
-//
-//     requestAnimationFrame(step);
-// }
-//
-// toastButton.addEventListener('click', () => {
-//     requestAnimationFrame(step)
-// })
