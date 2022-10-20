@@ -2,9 +2,7 @@ const toastButton = document.getElementById('toastButton');
 const toastWrap = document.getElementById('toast_wrap');
 let params;
 let counter = 1;
-let windowsHeight = (window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight);
-let animationStart;
-let requestId;
+let oldTimestamp = 0;
 
 function initToaster(_params) {
     params = _params;
@@ -14,6 +12,7 @@ function showToast(text) {
     const toastItem = document.createElement('div');
     let items = document.querySelectorAll('.toast-item');
     toastItem.classList.add('toast-item');
+    toastItem.style.zIndex = '1';
     toastItem.innerHTML = text;
 
     if (params.position === 'top-right') {
@@ -59,7 +58,45 @@ function showToast(text) {
     //     items[0].remove();
     // }
 
-    let intervalId = setInterval(() => {
+    // let intervalId = setInterval(() => {
+    //     let posTop = toastItem.style.top;
+    //     const endPosTop = parseInt(toastItem.dataset.top);
+    //     let posBottom = toastItem.style.bottom;
+    //     const endPosBottom = parseInt(toastItem.dataset.bottom);
+    //
+    //     posTop = parseInt(posTop);
+    //     posBottom = parseInt(posBottom);
+    //
+    //     if (params.position === 'top-right' || params.position === 'top-left') {
+    //         if (posTop < endPosTop) {
+    //             posTop += 1;
+    //             toastItem.style.top = posTop + 'px';
+    //         } else {
+    //             toastItem.style.position = 'initial';
+    //             clearInterval(intervalId);
+    //
+    //             setTimeout(()=> {
+    //                 toastItem.remove();
+    //             }, params.duration);
+    //         }
+    //     }
+    //
+    //     if (params.position === 'bottom-right' || params.position === 'bottom-left') {
+    //         if (posBottom < endPosBottom) {
+    //             posBottom += 1;
+    //             toastItem.style.bottom = posBottom + 'px';
+    //         } else {
+    //             toastItem.style.position = 'initial';
+    //             clearInterval(intervalId);
+    //
+    //             setTimeout(()=> {
+    //                 toastItem.remove();
+    //             }, params.duration);
+    //         }
+    //     }
+    // }, 10);
+
+    function step(timestamp) {
         let posTop = toastItem.style.top;
         const endPosTop = parseInt(toastItem.dataset.top);
         let posBottom = toastItem.style.bottom;
@@ -68,74 +105,90 @@ function showToast(text) {
         posTop = parseInt(posTop);
         posBottom = parseInt(posBottom);
 
-        if (params.position === 'top-right' || params.position === 'top-left') {
-            if (posTop < endPosTop) {
-                posTop += 1;
-                toastItem.style.top = posTop + 'px';
-            } else {
-                toastItem.style.position = 'initial';
-                clearInterval(intervalId);
+        if (!oldTimestamp) {
+            oldTimestamp = timestamp;
+        }
 
-                setTimeout(()=> {
-                    toastItem.remove();
-                }, params.duration);
+        if (params.position === 'top-right' || params.position === 'top-left') {
+            posTop += (timestamp - oldTimestamp) / 16;
+            toastItem.style.top = posTop + 'px';
+            oldTimestamp = timestamp;
+
+            if (posTop <= endPosTop) {
+                window.requestAnimationFrame(step);
             }
         }
 
         if (params.position === 'bottom-right' || params.position === 'bottom-left') {
-            if (posBottom < endPosBottom) {
-                posBottom += 1;
-                toastItem.style.bottom = posBottom + 'px';
-            } else {
-                toastItem.style.position = 'initial';
-                clearInterval(intervalId);
+            posBottom += (timestamp - oldTimestamp) / 16;
+            toastItem.style.bottom = posBottom + 'px';
+            oldTimestamp = timestamp;
 
-                setTimeout(()=> {
-                    toastItem.remove();
-                }, params.duration);
+            if (posBottom < endPosBottom) {
+                window.requestAnimationFrame(step);
             }
         }
-    }, 10);
-}
 
-// setInterval(() => {
-//
-// }, 50);
+        // setTimeout(()=> {
+        //     toastItem.remove();
+        // }, params.duration);
+    }
+
+    requestAnimationFrame(step);
+
+    // const animationBox = document.querySelector(".box_for_animation");
+    //
+    // function step(timestamp) {
+    //     if (!oldTimestamp) {
+    //         oldTimestamp = timestamp;
+    //     }
+    //
+    //     const progress = timestamp - oldTimestamp;
+    //
+    //     animationBox.style.transform = `translateY(${progress / 5}px)`;
+    //
+    //     const boxY = animationBox.getBoundingClientRect().bottom;
+    //
+    //     if (boxY <= window.innerHeight - 6) {
+    //         window.requestAnimationFrame(step);
+    //     }
+    // }
+    //
+    // requestAnimationFrame(step);
+}
 
 toastButton.addEventListener('click', ()=> {
     showToast('Message Toast Click' + counter);
     counter++;
-    startAnimation();
 })
 
 initToaster({
     count: 3,
     duration: 5000,
-    position: 'bottom-right', // 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right'
+    position: 'top-right', // 'top-right' | 'top-left' | 'bottom-left' | 'bottom-right'
 })
 
 // showToast('Message Toast Click');
 
-const animationBox = document.querySelector(".box_for_animation");
-
-function animate(timestamp) {
-    if (!animationStart) {
-        animationStart = timestamp;
-    }
-
-    const progress = timestamp - animationStart;
-
-    animationBox.style.transform = `translateY(${progress / 5}px)`;
-
-    const y = animationBox.getBoundingClientRect().y + 100;
-
-    if (y <= window.innerHeight - 6) {
-        window.requestAnimationFrame(animate);
-    } else {
-        window.cancelAnimationFrame(requestId);
-    }
-}
-
-function startAnimation() {
-    requestId = window.requestAnimationFrame(animate);
-}
+// function startAnimation() {
+//     requestId = window.requestAnimationFrame(step);
+// }
+// let oldTimestamp = 0;
+// function step(timestamp) {
+//     if (oldTimestamp === 0) {
+//         oldTimestamp = timestamp;
+//     }
+//
+//     console.log('Timestamp', timestamp - oldTimestamp ); // 16 , 1000
+//
+//     boxY += (timestamp - oldTimestamp) / 16;
+//     animationBox.style.top = boxY + 'px';
+//
+//     oldTimestamp = timestamp;
+//
+//     requestAnimationFrame(step);
+// }
+//
+// toastButton.addEventListener('click', () => {
+//     requestAnimationFrame(step)
+// })
