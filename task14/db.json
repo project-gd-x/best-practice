@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "dateTime": "03/11/2022, 13:34:20",
+      "title": "Napoleon",
+      "category": "Cooking",
+      "extra": {
+        "ingredients": [
+          {
+            "checked": true,
+            "title": "Flour 500g"
+          },
+          {
+            "checked": true,
+            "title": "Sugar 1kg"
+          }
+        ],
+        "description": "Make Puff Pastry or use store-bought puff pastry (see bottom of the recipe card for details). 1.Measure out all of the ingredients for the puff pastry and get your tools and utensils ready. 2.Wet Ingredients: Mix 2/3 cup cold water, 1 Tbsp vinegar & 3 Tbsp vodka (replace with water if not using) in a cup. In a separate cup whisk together 2 eggs and a 1/8 tsp salt. Combine mixtures of two cups and stir to combine. 3.Dry Ingredients: By food processor: Add 5 cups flour to the cup of your food processor. Now add 3 ½ sticks cold, cubed butter, and pulse or process until the crumbs are pea-size. By hand: Alternatively, pour the flour onto the cutting board, then add cold, cubed butter, and using a long, sharp knife keep cutting and mixing the mixture until the pieces are pea-size. 4.Add wet to dry: Add the liquid ingredients and continue pulsing or mixing until the dough starts sticking to itself a bit, but is not formed yet. 5.Form into a dough: Pour the content of the food processor bowl onto a work surface and start gathering and pressing the dough together with your hands, trying to work it as little as possible. Form a ball and knead it for a couple of seconds until a dough forms. 6.Shape & Divide: Shape the dough into a log and then cut it into 12 equal pieces. Roll each piece into a ball, cover, and refrigerate for about an hour to allow the liquid to hydrate the flour. This will also make it easier to roll the dough out later."
+      }
+    },
+    {
+      "dateTime": "30/11/2022, 13:34:20",
+      "title": "Borsh",
+      "category": "Cooking",
+      "extra": {
+        "ingredients": [
+          {
+            "checked": false,
+            "title": "Tomato 500g"
+          },
+          {
+            "checked": false,
+            "title": "Potato 1kg"
+          },
+          {
+            "checked": false,
+            "title": "Carrot"
+          }
+        ],
+        "description": "To a large 6 qt pot add 2 Qts of water, 1.5 lbs of beef, 1 whole onion, one whole carrot, 1/2 tbsp salt & 5-7 black peppercorns. Cover with lid, close the lid valve to “pressure” and set the pot to “pressure cook” for 60 minutes. While the meat is cooking render the bacon and sauté the vegetables: Render 4 strips of chopped bacon in a skillet over medium heat until crispy. Remove the bacon and discard the fat. Add 2-3 tablespoons of oil to the same skillet and 1.5 cups of diced onions and sauté, stirring continuously, until golden brown, about 5-8 minutes. To the onions add 1.5 cups shredded carrots, stir and continue. Now add 3 cups of shredded beets and stir. Season with 1 tsp of kosher salt, 2 tsp of black ground pepper, 2 tbsp of tomato paste, or 7.4 oz of tomato sauce and stir everything to combine. Cover with lid, turn the heat to low, and cook until the beets are soft, string several times throughout, about 25 minutes. After the time has expired on the pressure cooker, open the valve to “steam”, cover the valve with a towel so that the steam does not splatter as it escapes the valve, and allow the pressure to be released. Open the lid, remove beef to a separate bowl and shred it to smaller pieces. Collect and discard the cooked vegetables, peppercorns, and any impurities with a fine mesh skimmer."
+      }
+    }
+  ]
+}
