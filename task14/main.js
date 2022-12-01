@@ -37,6 +37,11 @@
 // createPost({ name: 'Ivan', title: 'Hi there' });
 // createComment({ name: 'Ivan', text: 'Hi there' });
 
+// Web Components
+// - templates
+// - custom elements
+// - shadow dom
+
 fetch('http://localhost:3000/events')
     .then(response => response.json())
     .then(json => {
@@ -44,10 +49,15 @@ fetch('http://localhost:3000/events')
         json.forEach( event => {
             const card = document.createElement('div');
             card.classList.add('card');
+
             const cardTitle = document.createElement('div');
             cardTitle.classList.add('card-title');
+            card.appendChild(cardTitle);
+
             const cardDate = document.createElement('div');
             cardDate.classList.add('card-data');
+            card.appendChild(cardDate);
+
             const cardCategory = document.createElement('div');
             cardCategory.classList.add('card-category');
             const cardExtra = document.createElement('div');
@@ -60,9 +70,11 @@ fetch('http://localhost:3000/events')
             cardTitle.innerHTML = event.title;
             cardCategory.innerHTML = event.category;
             cardDescription.innerHTML = event.extra.description;
+
             event.extra.ingredients.forEach( ingredient => {
                 const cardIngredientsLabel = document.createElement('label');
                 cardIngredientsLabel.classList.add('card-ingredients-label');
+
                 const cardIngredientsCheckBox = document.createElement('input');
                 cardIngredientsCheckBox.type = 'checkbox';
                 // cardIngredientsCheckBox.name = 'name';
@@ -74,8 +86,7 @@ fetch('http://localhost:3000/events')
                     cardIngredientsCheckBox.checked = true;
                 }
 
-                card.appendChild(cardTitle);
-                card.appendChild(cardDate);
+
                 card.appendChild(cardCategory);
                 card.appendChild(cardExtra);
                 cardExtra.appendChild(cardDescription);
@@ -87,3 +98,8 @@ fetch('http://localhost:3000/events')
             document.body.appendChild(card);
         })
     });
+
+
+// const cardTemplate = document.getElementById('card-template');
+// console.log(cardTemplate.content);
+// document.body.append(cardTemplate.content)
