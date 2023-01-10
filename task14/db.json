@@ -1,6 +1,7 @@
 {
   "events": [
     {
+      "id": "1",
       "dateTime": "03/11/2022, 13:34:20",
       "title": "Napoleon",
       "category": "Cooking",
@@ -19,6 +20,7 @@
       }
     },
     {
+      "id": "2",
       "dateTime": "30/11/2022, 13:34:20",
       "title": "Borsh",
       "category": "Cooking",
