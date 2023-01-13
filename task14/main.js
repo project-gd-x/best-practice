@@ -95,6 +95,7 @@ function renderModal() {
     modalHeader.append(modalBtnClose);
     modalBtnClose.addEventListener('click', () => {
         modal.remove();
+        document.body.classList.remove('modal-show');
     });
 
     const modalLabelTitle = document.createElement('label');
@@ -193,6 +194,7 @@ function renderModal() {
     modalFooter.append(modalBtnCancel);
     modalBtnCancel.addEventListener('click', () => {
         modal.remove();
+        document.body.classList.remove('modal-show');
     });
 
     const modalBtnAdd = document.createElement('button');
@@ -215,6 +217,9 @@ function renderModal() {
                 'description': modalTextareaDscr.value,
             },
         });
+        modal.remove();
+        document.body.classList.remove('modal-show');
+        location.reload();
     });
 
     document.body.append(modal);
@@ -265,7 +270,7 @@ fetch('http://localhost:3000/events')
                 cardIngredientsCheckBox.type = 'checkbox';
                 // cardIngredientsCheckBox.name = 'name';
                 cardIngredientsCheckBox.classList.add('card-checkbox');
-                cardIngredientsLabel.innerHTML = '<span class="card-ingredients-check-mark"></span>' + ingredient.title + ' ' + ingredient.checked;
+                cardIngredientsLabel.innerHTML = '<span class="card-ingredients-check-mark"></span>' + ingredient.title;
                 cardIngredientsLabel.prepend(cardIngredientsCheckBox);
                 cardIngredients.append(cardIngredientsLabel);
 
