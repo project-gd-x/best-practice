@@ -1,22 +1,18 @@
-fetch('http://localhost:3001/events')
+const API_HOST = 'http://localhost:3000';
+
+fetch(API_HOST + '/events')
     .then(response => response.json())
     .then(commits => console.log(commits));
 
 
 function post(data) {
-    return fetch('http://localhost:3001/events', {
+    return fetch(API_HOST + '/events', {
         headers: {
             'Content-Type': 'application/json'
         },
         method: "POST",
         body: JSON.stringify(data)
     })
-        // .then(function (response) {
-        //     if (!response.ok) {
-        //         return new Error(response.statusText)
-        //     }
-        //     return response.json()
-        // })
       .then(response => response.json())
 
         // .then((data) => {
@@ -27,18 +23,9 @@ function post(data) {
         // })
 }
 
-// function createEvent(eventObject) {
-//     post('events', postObject);
-// }
-//
-// function createExtra(extraObject) {
-//     post('events.extra', commentObject);
-// }
 function createPost(postObject) {
     return post(postObject);
 }
-
-// createPost({ name: 'Ivan', title: 'Hi there' });
 
 // Web Components
 // - templates
@@ -219,20 +206,19 @@ function renderModal() {
             },
         };
         createPost(newEvent).then((data) => {
-            console.log('CREATE:', data);
+            // console.log('CREATE:', data);
             // data - теж саме що і newEvent, тільки з id.
             addEvent(data);
         });
         modal.remove();
         document.body.classList.remove('modal-show');
-        // location.reload();
 
     });
 
     document.body.append(modal);
 }
 
-fetch('http://localhost:3001/events')
+fetch(API_HOST + '/events')
     .then(response => response.json())
     .then(events => {
 
