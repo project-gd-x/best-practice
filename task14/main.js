@@ -1,29 +1,30 @@
-fetch('http://localhost:3000/events')
+fetch('http://localhost:3001/events')
     .then(response => response.json())
     .then(commits => console.log(commits));
 
 
 function post(data) {
-    fetch('http://localhost:3000/events', {
+    return fetch('http://localhost:3001/events', {
         headers: {
             'Content-Type': 'application/json'
         },
         method: "POST",
         body: JSON.stringify(data)
     })
-        .then(function (response) {
-            if (!response.ok) {
-                return new Error(response.statusText)
-            }
-            return response.json()
-        })
+        // .then(function (response) {
+        //     if (!response.ok) {
+        //         return new Error(response.statusText)
+        //     }
+        //     return response.json()
+        // })
+      .then(response => response.json())
 
-        .then((data) => {
-            console.log('data',data);
-        })
-        .catch(function (error) {
-            console.log('error', error)
-        })
+        // .then((data) => {
+        //     console.log('data',data);
+        // })
+        // .catch(function (error) {
+        //     console.log('error', error)
+        // })
 }
 
 // function createEvent(eventObject) {
@@ -34,7 +35,7 @@ function post(data) {
 //     post('events.extra', commentObject);
 // }
 function createPost(postObject) {
-    post(postObject);
+    return post(postObject);
 }
 
 // createPost({ name: 'Ivan', title: 'Hi there' });
@@ -203,7 +204,7 @@ function renderModal() {
     modalBtnAdd.innerHTML = 'Create event';
     modalFooter.append(modalBtnAdd);
     modalBtnAdd.addEventListener('click', () => {
-        createPost({
+        const newEvent = {
             'title': modalInputTitle.value,
             'dateTime': modalInputDate.value,
             'category': modalSelectCategory.options[modalSelectCategory.selectedIndex].value,
@@ -216,70 +217,80 @@ function renderModal() {
                 ],
                 'description': modalTextareaDscr.value,
             },
+        };
+        createPost(newEvent).then((data) => {
+            console.log('CREATE:', data);
+            // data - теж саме що і newEvent, тільки з id.
+            addEvent(data);
         });
         modal.remove();
         document.body.classList.remove('modal-show');
-        location.reload();
+        // location.reload();
+
     });
 
     document.body.append(modal);
 }
 
-fetch('http://localhost:3000/events')
+fetch('http://localhost:3001/events')
     .then(response => response.json())
-    .then(json => {
+    .then(events => {
 
-        json.forEach( event => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-
-            const cardTitle = document.createElement('div');
-            cardTitle.classList.add('card-title');
-            card.append(cardTitle);
-
-            const cardDate = document.createElement('div');
-            cardDate.classList.add('card-data');
-            card.append(cardDate);
-
-            const cardCategory = document.createElement('div');
-            cardCategory.classList.add('card-category');
-            card.append(cardCategory);
-
-            const cardExtra = document.createElement('div');
-            cardExtra.classList.add('card-extra');
-            card.append(cardExtra);
-
-            const cardDescription = document.createElement('div');
-            cardDescription.classList.add('card-description');
-            cardExtra.append(cardDescription);
-
-            const cardIngredients = document.createElement('div');
-            cardIngredients.classList.add('card-ingredients');
-            cardExtra.append(cardIngredients);
-
-            cardDate.innerHTML = event.dateTime;
-            cardTitle.innerHTML = event.title;
-            cardCategory.innerHTML = event.category;
-            cardDescription.innerHTML = event.extra.description;
-
-            event.extra.ingredients.forEach( ingredient => {
-                const cardIngredientsLabel = document.createElement('label');
-                cardIngredientsLabel.classList.add('card-ingredients-label');
-
-                const cardIngredientsCheckBox = document.createElement('input');
-                cardIngredientsCheckBox.type = 'checkbox';
-                // cardIngredientsCheckBox.name = 'name';
-                cardIngredientsCheckBox.classList.add('card-checkbox');
-                cardIngredientsLabel.innerHTML = '<span class="card-ingredients-check-mark"></span>' + ingredient.title;
-                cardIngredientsLabel.prepend(cardIngredientsCheckBox);
-                cardIngredients.append(cardIngredientsLabel);
-
-                if (ingredient.checked) {
-                    cardIngredientsCheckBox.checked = true;
-                }
-
-            });
-            document.body.append(card);
+        events.forEach( event => {
+            addEvent(event);
         })
     });
+
+function addEvent(event) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const cardTitle = document.createElement('div');
+    cardTitle.classList.add('card-title');
+    card.append(cardTitle);
+
+    const cardDate = document.createElement('div');
+    cardDate.classList.add('card-data');
+    card.append(cardDate);
+
+    const cardCategory = document.createElement('div');
+    cardCategory.classList.add('card-category');
+    card.append(cardCategory);
+
+    const cardExtra = document.createElement('div');
+    cardExtra.classList.add('card-extra');
+    card.append(cardExtra);
+
+    const cardDescription = document.createElement('div');
+    cardDescription.classList.add('card-description');
+    cardExtra.append(cardDescription);
+
+    const cardIngredients = document.createElement('div');
+    cardIngredients.classList.add('card-ingredients');
+    cardExtra.append(cardIngredients);
+
+    cardDate.innerHTML = event.dateTime;
+    cardTitle.innerHTML = event.title;
+    cardCategory.innerHTML = event.category;
+    cardDescription.innerHTML = event.extra.description;
+
+    event.extra.ingredients.forEach( ingredient => {
+        const cardIngredientsLabel = document.createElement('label');
+        cardIngredientsLabel.classList.add('card-ingredients-label');
+
+        const cardIngredientsCheckBox = document.createElement('input');
+        cardIngredientsCheckBox.type = 'checkbox';
+        // cardIngredientsCheckBox.name = 'name';
+        cardIngredientsCheckBox.classList.add('card-checkbox');
+        cardIngredientsLabel.innerHTML = '<span class="card-ingredients-check-mark"></span>' + ingredient.title;
+        cardIngredientsLabel.prepend(cardIngredientsCheckBox);
+        cardIngredients.append(cardIngredientsLabel);
+
+        if (ingredient.checked) {
+            cardIngredientsCheckBox.checked = true;
+        }
+
+    });
+    document.body.append(card);
+}
 
